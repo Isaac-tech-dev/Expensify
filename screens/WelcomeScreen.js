@@ -9,6 +9,7 @@ export default function WelcomeScreen() {
     const navigation = useNavigation();
   return (
     <ScreenWrapper>
+      <StatusBar/>
       <View className="h-full flex justify-around">
         <View className="flex-row justify-center mt-10">
             <Image source={require('../assets/images/welcome.gif')} className="h-96 w-96 shadow"/>

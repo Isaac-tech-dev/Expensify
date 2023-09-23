@@ -5,6 +5,7 @@ import { colors } from "../theme";
 import BackButton from "../components/backButton";
 import { useNavigation } from "@react-navigation/native";
 import { categories } from "../constants";
+import { StatusBar } from "expo-status-bar";
 
 export default function AddExpenseScreen() {
   const [title, setTitle] = useState("");
@@ -23,6 +24,7 @@ export default function AddExpenseScreen() {
   };
   return (
     <ScreenWrapper>
+      <StatusBar/>
       <View className="flex justify-between h-full mx-4">
         <View>
           <View className="relative mt-5">

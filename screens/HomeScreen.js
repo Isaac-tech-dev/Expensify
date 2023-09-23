@@ -41,6 +41,7 @@ export default function HomeScreen() {
 
   return (
     <ScreenWrapper className="flex-1">
+    <StatusBar/>
       <View className="flex-row justify-between items-center p-4">
         <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>Expensify</Text>
         <TouchableOpacity onPress={handleLogout} className="p-2 px-3 bg-white border-gray border-200 rounded-full">

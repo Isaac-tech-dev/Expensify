@@ -1,4 +1,12 @@
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import ScreenWrapper from "../../components/screenWrapper";
 import { colors } from "../../theme";
@@ -10,22 +18,31 @@ import { auth } from "../../config/firebase";
 export default function SignUpScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
+    setLoading(true);
+
     if (email && password) {
-        try {
-            await createUserWithEmailAndPassword(auth, email, password)
-        } catch (err) {
-            console.log('Error:', err.message)
-        }
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        console.log("Error:", err.message);
+      }
       //Goodd to Go
       //navigation.goBack()
       //navigation.navigate("Home");
     } else {
       //show error
     }
+    setTimeout(() => {
+      // After the operation is complete, hide the ActivityIndicator
+      setLoading(false);
+
+      // You can also navigate to another screen or perform any other action here.
+    }, 2000);
   };
   return (
     <ScreenWrapper>
@@ -45,7 +62,7 @@ export default function SignUpScreen() {
               source={require("../../assets/images/signup.png")}
             />
           </View>
-          <View className="space-y-2 mx-2">
+          <ScrollView className="space-y-2 mx-1">
             <Text className={`${colors.heading} text-lg font-bold`}>
               Full Namde
             </Text>
@@ -71,19 +88,23 @@ export default function SignUpScreen() {
               onChangeText={(value) => setPassword(value)}
               className="p-4 bg-white rounded-full mb-3"
             />
-          </View>
-        </View>
 
-        <View>
-          <TouchableOpacity
-            onPress={handleSubmit}
-            style={{ backgroundColor: colors.button }}
-            className="my-6 rounded-full p-3 shadow-sm mx-2"
-          >
-            <Text className="text-center text-white text-lg font-bold">
-              Sign Up
-            </Text>
-          </TouchableOpacity>
+            <View>
+              {loading ? (
+                <ActivityIndicator size="large" color="#0000ff" />
+              ) : (
+                <TouchableOpacity
+                  onPress={handleSubmit}
+                  style={{ backgroundColor: colors.button }}
+                  className="my-6 rounded-full p-3 shadow-sm mx-2"
+                >
+                  <Text className="text-center text-white text-lg font-bold">
+                    Sign Up
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </ScrollView>
         </View>
       </View>
     </ScreenWrapper>

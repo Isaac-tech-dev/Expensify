@@ -4,6 +4,7 @@ import ScreenWrapper from '../components/screenWrapper'
 import { colors } from '../theme'
 import BackButton from '../components/backButton'
 import { useNavigation } from '@react-navigation/native'
+import { StatusBar } from 'expo-status-bar'
 
 export default function AddTripScreen() {
 
@@ -22,6 +23,7 @@ export default function AddTripScreen() {
     }
   return (
     <ScreenWrapper>
+        <StatusBar/>
         <View className="flex justify-between h-full mx-4">
             <View>
                 <View className="relative mt-5">

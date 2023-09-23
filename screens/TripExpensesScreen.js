@@ -37,6 +37,7 @@ export default function TripExpensesScreen(props) {
 
   return (
     <ScreenWrapper className="flex-1">
+      <StatusBar/>
       <View className="px-4">
         <View className="relative mt-5">
           <View className="absolute top-0 left-0 z-10">
