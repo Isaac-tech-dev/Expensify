@@ -4,23 +4,28 @@ import ScreenWrapper from '../../components/screenWrapper'
 import { colors } from '../../theme'
 import BackButton from '../../components/backButton'
 import { useNavigation } from '@react-navigation/native'
+import {signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../config/firebase'
 
 export default function SignInScreen() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigation = useNavigation();
-
-    const handleSubmit = () => {
-        if(email && password) {
-            //Goodd to Go
-            navigation.goBack()
-            navigation.navigate("Home")
-        }else{
-            //show error
+    const handleSubmit = async() => {
+        if (email && password) {
+            try {
+                await signInWithEmailAndPassword(auth, email, password)
+            } catch (err) {
+                console.log('Error:', err.message)
+            }
+          //Goodd to Go
+          //navigation.goBack()
+          //navigation.navigate("Home");
+        } else {
+          //show error
         }
-    }
+      };
   return (
     <ScreenWrapper>
         <View className="flex justify-between h-full mx-4">

@@ -6,6 +6,8 @@ import { colors } from '../theme';
 import randomImage from '../assets/images/randomImage';
 import EmptyList from '../components/emptyList';
 import { useNavigation } from '@react-navigation/native';
+import { signOut } from 'firebase/auth';
+import { auth } from '../config/firebase';
 
 const item =[
     {
@@ -33,11 +35,15 @@ const item =[
 export default function HomeScreen() {
     const navigation = useNavigation();
 
+    const handleLogout = async ()=> {
+        await signOut(auth)
+    }
+
   return (
     <ScreenWrapper className="flex-1">
       <View className="flex-row justify-between items-center p-4">
         <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>Expensify</Text>
-        <TouchableOpacity className="p-2 px-3 bg-white border-gray border-200 rounded-full">
+        <TouchableOpacity onPress={handleLogout} className="p-2 px-3 bg-white border-gray border-200 rounded-full">
             <Text className={`${colors.heading}`}>Logout</Text>
         </TouchableOpacity>
       </View>
